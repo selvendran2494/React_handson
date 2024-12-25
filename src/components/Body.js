@@ -1,6 +1,8 @@
 import { useState } from "react";
 import  restList from "../utils/mockData"
 import RestaurantCard from "./RestaurantCard";
+import Calculator from "./Calculator";
+
 const Body = () => {
   const [listofRestaurants, setlistofRestaurants] = useState(restList);
   return (
@@ -17,6 +19,7 @@ const Body = () => {
       >
         Filter Highest Rating
       </button>
+
       <div className="container">
         {listofRestaurants.map((restaurant) => (
           <RestaurantCard
@@ -25,6 +28,7 @@ const Body = () => {
           />
         ))}
       </div>
+      <Calculator />
     </main>
   );
 };
