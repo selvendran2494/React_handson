@@ -3,10 +3,11 @@ const RestaurantCard = ({ resDatakey }) => {
     const {
       card: {
         card: {
-          info: { cloudinaryImageId, name, cuisines, costForTwo, areaName },
+          info: { cloudinaryImageId, name, cuisines, costForTwo, areaName,avgRating },
         },
       },
     } = resDatakey || {};
+    console.log(resDatakey)
   
     return (
       <div className="card">
@@ -23,6 +24,7 @@ const RestaurantCard = ({ resDatakey }) => {
           <h2 className="card-title">{cuisines.join(",")}</h2>
           <p className="card-price">{costForTwo}</p>
           <p className="card-price">{areaName}</p>
+          <p className="card-price">{avgRating}</p>
         </div>
       </div>
     );
