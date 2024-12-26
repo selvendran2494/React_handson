@@ -28,7 +28,7 @@ const Body = () => {
           />
         ))}
       </div>
-      <Calculator />
+      {/* <Calculator /> */}
     </main>
   );
 };
