@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import RestaurantCard from "./RestaurantCard";
 import Shimmer from "./Shimmer";
 
-
 const Body = () => {
   const [listofRestaurants, setlistofRestaurants] = useState([]);
 
@@ -19,22 +18,19 @@ const Body = () => {
         ?.restaurants
     );
   };
-  if (listofRestaurants.length === 0) {
-    return (
-      <div className="shimmer-wrapper">
-        {Array(20)
-          .fill("")
-          .map((_, index) => (
-            <Shimmer key={index} />
-          ))}
-      </div>
-    );
-  }
-  return (
+  return listofRestaurants.length === 0 ? (
+    <div className="shimmer-wrapper">
+      {Array(20)
+        .fill("")
+        .map((_, index) => (
+          <Shimmer key={index} />
+        ))}
+    </div>
+  ) : (
     <main className="main">
       <button
         className="button-pad"
-        onClick={() => {          
+        onClick={() => {
           const filterednewList = listofRestaurants.filter(
             (restaurant) => restaurant.info.avgRating >= 4.5
           );
@@ -46,10 +42,7 @@ const Body = () => {
 
       <div className="container">
         {listofRestaurants.map((restaurant) => (
-          <RestaurantCard
-            key={restaurant?.info?.id}
-            resDatakey={restaurant}
-          />
+          <RestaurantCard key={restaurant?.info?.id} resDatakey={restaurant} />
         ))}
       </div>
     </main>
