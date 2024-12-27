@@ -144,10 +144,12 @@ body {
   font-size: 16px;
   color: #555;
 }
-.button-pad{
+
+.button-pad {
   padding: 5px;
   margin: 5px;
 }
+
 /* Caluclator */
 
 .calculator {
@@ -226,11 +228,17 @@ body {
   0% {
     background-position: -1000px 0;
   }
+
   100% {
     background-position: 1000px 0;
   }
 }
-.login-btn{
+
+.login-btn {
   padding: 5px;
   margin-top: -7px;
+}
+
+.input-container {
+  display: inline;
 }

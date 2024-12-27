@@ -4,6 +4,7 @@ import Shimmer from "./Shimmer";
 
 const Body = () => {
   const [listofRestaurants, setlistofRestaurants] = useState([]);
+  const [searchText, setsearchText] = useState([]);
 
   useEffect(() => {
     fetchdata();
@@ -39,6 +40,31 @@ const Body = () => {
       >
         Filter Highest Rating
       </button>
+      <div className="input-container">
+        <input
+          type="text"
+          value={searchText}
+          onChange={(e) => {
+            setsearchText(e.target.value);
+          }}
+        ></input>
+        <button
+          onClick={() => {        
+            const filteredText = listofRestaurants.filter((obj) => obj.info.name.toLowerCase().includes(searchText.toLowerCase()));
+            console.log("filteredText",filteredText);
+            setlistofRestaurants(filteredText);
+          }}
+        >
+          Search
+        </button>
+        <button
+          onClick={() => {   
+            fetchdata();
+          }}
+        >
+          Reset
+        </button>
+      </div>
 
       <div className="container">
         {listofRestaurants.map((restaurant) => (
