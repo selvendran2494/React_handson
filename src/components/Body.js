@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import RestaurantCard from "./RestaurantCard";
 import Shimmer from "./Shimmer";
+import { Link } from "react-router-dom";
+
 
 const Body = () => {
   const [listofRestaurants, setlistofRestaurants] = useState([]);
@@ -39,6 +41,7 @@ const Body = () => {
             (restaurant) => restaurant.info.avgRating >= 4.5
           );
           setlistofRestaurants(filterednewList);
+          setFilterState(filterednewList)
         }}
       >
         Filter Highest Rating
@@ -70,7 +73,12 @@ const Body = () => {
 
       <div className="container">
         {filterState.map((restaurant) => (
-          <RestaurantCard key={restaurant?.info?.id} resDatakey={restaurant} />
+          <Link className="link-reset"
+            key={restaurant?.info?.id}
+            to={`/restaurant/${restaurant?.info?.id}`}
+          >
+            <RestaurantCard resDatakey={restaurant} />
+          </Link>
         ))}
       </div>
     </main>

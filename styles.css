@@ -242,3 +242,7 @@ body {
 .input-container {
   display: inline;
 }
+.link-reset{
+  text-decoration: none;
+  color: inherit;
+}
