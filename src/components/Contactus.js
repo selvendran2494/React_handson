@@ -1,4 +1,5 @@
 import "../css/contactus.css";
+import ContactClass from "./ContactClass";
 
 
 const Contactus = ()=>{
@@ -42,6 +43,7 @@ const Contactus = ()=>{
             <p><strong>Phone:</strong> +123 456 7890</p>
           </div>
         </div>
+        <ContactClass/>
       </div>
     )
 }
