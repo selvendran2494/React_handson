@@ -1,8 +1,19 @@
 import "../css/aboutus.css";
-
+import User from "./User";
+import UserClass from "./UserClass";
 const Aboutus = () => {
-    return (
-        <div className="about-container">
+  const teamMembers = [
+    { name: "John Doe - Functional", position: "CEO & Founder" },
+    { name: "Jane Smith - Functional", position: "CTO" },
+    { name: "Alice Johnson - Functional", position: "CFO" },
+  ];
+  const teamMembersClass = [
+    { name: "John Doe - Class", position: "CEO & Founder" },
+    { name: "Jane Smith - Class", position: "CTO" },
+    { name: "Alice Johnson - Class", position: "CFO" },
+  ];
+  return (
+    <div className="about-container">
       <div className="about-header">
         <h1>About Us</h1>
         <p>Your trusted partner in innovation and growth</p>
@@ -28,7 +39,7 @@ const Aboutus = () => {
       <div className="team-section">
         <h2>Meet Our Team</h2>
         <div className="team-grid">
-          <div className="team-member">
+          {/* <div className="team-member">
             <img
               src="https://via.placeholder.com/150"
               alt="Team Member"
@@ -54,10 +65,24 @@ const Aboutus = () => {
             />
             <h3>Emily Johnson</h3>
             <p>Head of Marketing</p>
-          </div>
+          </div> */}
+          {teamMembers.map((member, index) => (
+            <User
+              key={index}
+              name={member.name}
+              position={member.position}             
+            />
+          ))}
+          {teamMembersClass.map((member, index) => (
+            <UserClass
+              key={index}
+              name={member.name}
+              position={member.position}              
+            />
+          ))}
         </div>
       </div>
     </div>
-    );
-}
-export default Aboutus
+  );
+};
+export default Aboutus;
