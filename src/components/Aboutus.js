@@ -1,7 +1,17 @@
+import { useEffect } from "react";
 import "../css/aboutus.css";
 import User from "./User";
 import UserClass from "./UserClass";
+
 const Aboutus = () => {
+  useEffect(()=>{
+    // const intervalId = setInterval(() => {
+    //   console.log("Heelooo!!");
+    // }, 1000);
+    // return () => {
+    //   clearInterval(intervalId);
+    // }
+  })
   const teamMembers = [
     { name: "John Doe - Functional", position: "CEO & Founder" },
     { name: "Jane Smith - Functional", position: "CTO" },
