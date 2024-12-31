@@ -1,41 +1,35 @@
-import { useEffect, useState } from "react";
 import "../css/restaurantmenu.css";
 import Shimmer from "./Shimmer";
 import { imageUrl } from "../utils/constants";
 import { useParams } from "react-router-dom";
+import useRestaurantmenu from "../utils/useRestaurantmenu";
 const Restaurantmenu = () => {
-  const [resdetails, setResdetails] = useState(null);
-  const {resid}=useParams();
-  console.log(resid)
-
-  useEffect(() => {
-    fetchMenu();
-  }, []);
-
-  const fetchMenu = async () => {
-    const data = await fetch(
-      `https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=12.9832379&lng=80.1821011&restaurantId=${resid}&catalog_qa=undefined&submitAction=ENTER`
-    );
-    const json = await data.json();
-    console.log("Full-json", json);
-    console.log("info-json", json?.data?.cards[2]?.card?.card.info);
-    setResdetails(json?.data);
-  };
+  const { resid } = useParams();
+  const resdetails = useRestaurantmenu(resid);
 
   if (!resdetails) {
     return <Shimmer />;
   }
-  console.log("resdetails",resdetails);
-  const { name, city, avgRating, costForTwoMessage, cuisines,cloudinaryImageId } = resdetails?.cards[2]?.card?.card.info;
-  const { itemCards} = resdetails?.cards[4].groupedCard.cardGroupMap.REGULAR.cards[2].card.card;
-  console.log(itemCards)
+  console.log("resdetails", resdetails);
+  const {
+    name,
+    city,
+    avgRating,
+    costForTwoMessage,
+    cuisines,
+    cloudinaryImageId,
+  } = resdetails?.cards[2]?.card?.card.info;
+  const { itemCards } =
+    resdetails?.cards[4].groupedCard.cardGroupMap.REGULAR.cards[2].card.card;
+  console.log(itemCards);
 
   return (
     <div className="restaurant-container">
       {/* Banner Section */}
       <div className="restaurant-banner">
         <img
-          src={imageUrl + cloudinaryImageId} style={{width:"400px",height:"400px"}}
+          src={imageUrl + cloudinaryImageId}
+          style={{ width: "400px", height: "400px" }}
           alt="Restaurant Banner"
           className="banner-image"
         />
@@ -53,7 +47,7 @@ const Restaurantmenu = () => {
       </div>
 
       {/* Menu Section */}
- 
+
       <div className="menu-section">
         <h2>Menu Highlights</h2>
         <div className="menu-items">
