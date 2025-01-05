@@ -13,18 +13,18 @@ const RestaurantCard = ({ resDatakey }) => {
   } = resDatakey;
 
   return (
-    <div className="card">
+    <div className="w-[300px] rounded-lg py-2 gap-8">
       <img
         src={imageUrl + cloudinaryImageId}
         alt="Delicious Food"
-        className="card-img"
+        className="h-[200px] rounded w-full object-cover py-2"
       />
-      <div className="card-content">
-        <h2 className="card-title">{name}</h2>
-        <h2 className="card-title">{cuisines.join(",")}</h2>
-        <p className="card-price">{costForTwo}</p>
-        <p className="card-price">{areaName}</p>
-        <p className="card-price">{avgRating}</p>
+      <div className="flex flex-col items-center">
+        <h2 className="w-full break-words items-center text-center font-bold">{name}</h2>
+        <h2 className="w-full break-words items-center text-center">{cuisines.join(",")}</h2>
+        <p className="">{costForTwo}</p>
+        <p className="">{areaName}</p>
+        <p className="font-bold">{avgRating}</p>
       </div>
     </div>
   );
