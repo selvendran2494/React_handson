@@ -20,14 +20,29 @@ const RestaurantCard = ({ resDatakey }) => {
         className="h-[200px] rounded w-full object-cover py-2"
       />
       <div className="flex flex-col items-center">
-        <h2 className="w-full break-words items-center text-center font-bold">{name}</h2>
-        <h2 className="w-full break-words items-center text-center">{cuisines.join(",")}</h2>
+        <h2 className="w-full break-words items-center text-center font-bold">
+          {name}
+        </h2>
+        <h2 className="w-full break-words items-center text-center">
+          {cuisines.join(",")}
+        </h2>
         <p className="">{costForTwo}</p>
         <p className="">{areaName}</p>
         <p className="font-bold">{avgRating}</p>
       </div>
     </div>
   );
+};
+
+export const withbestsellerTag = (RestaurantCard) => {
+  return (props) => {  
+    return (
+      <div>
+        <p className="absolute bg-black text-white rounded-lg px-2">Best Ratings</p>
+        <RestaurantCard {...props} />
+      </div>
+    );
+  };
 };
 
 export default RestaurantCard;

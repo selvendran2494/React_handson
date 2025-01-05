@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import RestaurantCard from "./RestaurantCard";
+import { Component, useEffect, useState } from "react";
+import RestaurantCard, { withbestsellerTag } from "./RestaurantCard";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
 import useOnlinestatus from "../utils/useOnlinestatus";
@@ -9,6 +9,8 @@ const Body = () => {
   const [searchText, setsearchText] = useState([]);
   const [filterState, setFilterState] = useState([]);
   const checkOnlineStatus = useOnlinestatus();
+  // Higher Order Component
+  const RestaurantCardRating = withbestsellerTag(RestaurantCard);
 
   useEffect(() => {
     fetchdata();
@@ -53,7 +55,8 @@ const Body = () => {
         Filter Highest Rating
       </button>
       <div className="inline">
-        <input className="border-2 border-black"
+        <input
+          className="border-2 border-black"
           type="text"
           value={searchText}
           onChange={(e) => {
@@ -88,7 +91,12 @@ const Body = () => {
             key={restaurant?.info?.id}
             to={`/restaurant/${restaurant?.info?.id}`}
           >
-            <RestaurantCard resDatakey={restaurant} />
+            {/* if restaurant has higher rating means HOC (existing + addON ) , else existing component */}
+            {restaurant?.info?.avgRating > 4.5 ? (
+              <RestaurantCardRating resDatakey={restaurant}/>
+            ) : (
+              <RestaurantCard resDatakey={restaurant} />
+            )}
           </Link>
         ))}
       </div>

@@ -2,36 +2,34 @@ import "../css/restaurantmenu.css";
 import Shimmer from "./Shimmer";
 import { useParams } from "react-router-dom";
 import useRestaurantmenu from "../utils/useRestaurantmenu";
-import { useState, useEffect } from "react";
+import RestaurantCategory from "./RestaurantCategory";
 
 const Restaurantmenu = () => {
   const { resid } = useParams();
   const resdetails = useRestaurantmenu(resid);
-  const [itemCards, setItemCards] = useState([]);
-  const [bestseller, setBestseller] = useState([]);
-
-  useEffect(() => {
-    if (resdetails) {
-      const initialItemCards = resdetails?.cards[4].groupedCard.cardGroupMap.REGULAR.cards[2].card.card.itemCards;
-      setItemCards(initialItemCards);
-      setBestseller(initialItemCards); // Initially show all items
-    }
-  }, [resdetails]);
 
   if (!resdetails) {
     return <Shimmer />;
   }
+  console.log("Res-details-res-menu", resdetails);
 
-  console.log("resdetails", resdetails);
-  const {
-    name,
-    city,
-    avgRating,
-    costForTwoMessage,
-    cuisines,
-    cloudinaryImageId,
-  } = resdetails?.cards[2]?.card?.card.info;
-
+  const { name, city, avgRating, costForTwoMessage, cuisines } =
+    resdetails?.cards[2]?.card?.card.info;
+  const getCategories =
+    resdetails?.cards?.[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards?.filter(
+      (c) => {
+        return (
+          c.card.card["@type"] ===
+          "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory"
+        );
+      }
+    );
+  console.log("getCategories", getCategories);
+  const { itemCards } =
+    resdetails?.cards?.[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards?.[2]?.card
+      ?.card?.categories?.[0] ||
+    resdetails?.cards[4].groupedCard.cardGroupMap.REGULAR.cards[2].card.card;
+  console.log("itemCards", itemCards);
   return (
     <div className="restaurant-container">
       <div className="border-2 border-gray-300 rounded-lg shadow-lg px-3 py-3 w-1/2 mx-auto">
@@ -53,35 +51,15 @@ const Restaurantmenu = () => {
       <div className="menu-section">
         <h2 className="font-bold text-center">Menu Highlights</h2>
 
-        <div className="flex justify-center items-center">
-          <button
-            className="border-1 shadow-lg px-6 m-2 rounded-lg bg-orange-300"
-            onClick={() => {
-              const filteredBestsellers = itemCards.filter((obj) => {
-                return obj.card.info.ribbon?.text === "Bestseller";
-              });
-              console.log(filteredBestsellers);
-              setBestseller(filteredBestsellers);
-            }}
-          >
-            Best Seller
-          </button>
-        </div>
-
-        <div className="flex border-2 border-gray-200 shadow-lg p-2 m-2 rounded-lg max-w-2xl mx-auto">
-          <h1 className="font-bold">Starters ({itemCards?.length})</h1>
-        </div>
-        <div className="flex flex-col max-w-2xl mx-auto">
-          {bestseller?.map((obj) => {
+        {/* <div className="flex flex-col max-w-2xl mx-auto">
+        <p className="mx-3 text-xl font-bold">Category</p>
+          {itemCards?.map((obj) => {
             return (
               <div
                 className="flex border-2 border-gray-200 shadow-lg p-2 m-2 rounded-lg"
                 key={obj.card.info.id}
               >
                 <div className="flex-1">
-                  <p className="text-orange-500 font-bold">
-                    {obj.card.info.ribbon?.text}
-                  </p>
                   <h4 className="font-bold">{obj.card.info.name}</h4>
                   <h4 className="font-bold">
                     ₹{obj.card.info.price || obj.card.info.defaultPrice / 100}
@@ -98,6 +76,15 @@ const Restaurantmenu = () => {
                     Add
                   </button>
                 </div>
+              </div>
+            );
+          })}
+        </div> */}
+        <div className="flex flex-col max-w-2xl mx-auto">
+          {getCategories?.map((obj) => {
+            return (
+              <div>
+                <RestaurantCategory data={obj.card.card} />
               </div>
             );
           })}
