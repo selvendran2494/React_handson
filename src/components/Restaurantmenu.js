@@ -83,7 +83,7 @@ const Restaurantmenu = () => {
         <div className="flex flex-col max-w-2xl mx-auto">
           {getCategories?.map((obj) => {
             return (
-              <div>
+              <div key={obj.card.card.title}>
                 <RestaurantCategory data={obj.card.card} />
               </div>
             );
