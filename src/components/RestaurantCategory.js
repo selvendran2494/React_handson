@@ -10,12 +10,12 @@ const RestaurantCategory = ({ data }) => {
   };
   return (
     <div
-      className="border-2 bg-gray-50 rounded-lg  px-2 py-2 my-1 shadow-lg cursor-pointer"
+      className="border-1 bg-gray-50  px-4 py-2 shadow-md my-2 cursor-pointer"
       onClick={handleClick}
     >
       {/* 1.Header */}
       <div className="flex justify-between">
-        <span className="font-extrabold">
+        <span className="font-bold">
           {data.title} ({data?.itemCards?.length})
         </span>
         {/* <span className="ml-2">

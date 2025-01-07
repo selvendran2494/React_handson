@@ -19,7 +19,7 @@ const ItemList = ({ item }) => {
               <img
                 src={`https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_300,h_300,c_fit/${obj.card.info.imageId}`}
                 alt="Dish"
-                className="object-contain h-24 rounded-lg"
+                className="object-cover h-36 w-[156px] rounded-lg"
               />
               <button className="border-2 shadow-lg px-12 m-2 hover:bg-orange-300">
                 Add
