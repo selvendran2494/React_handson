@@ -1,6 +1,6 @@
 import ItemList from "./ItemList";
 
-const RestaurantCategory = ({ data , showItems , setShowIndex }) => {
+const RestaurantCategory = ({ data , showItems , setShowIndex , child }) => { 
   const handleClick = () => {
    setShowIndex()
   };
@@ -16,7 +16,7 @@ const RestaurantCategory = ({ data , showItems , setShowIndex }) => {
         <i className="fas fa-chevron-up"></i>      
       </div>
       {/* 2.Body */}
-      {showItems && <ItemList item={data} />}
+      {showItems && <ItemList item={data} grandchild={child} />}
     </div>
   );
 };

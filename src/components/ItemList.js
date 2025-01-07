@@ -1,4 +1,4 @@
-const ItemList = ({ item }) => {
+const ItemList = ({ item , grandchild }) => {
   const itemCards = item.itemCards;
   return (
     <div>

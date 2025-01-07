@@ -6,6 +6,7 @@ import RestaurantCategory from "./RestaurantCategory";
 import { useState } from "react";
 
 const Restaurantmenu = () => {
+  const testDatafromparent = "I have a data in Restaurant menu => a top level component."
   const { resid } = useParams();
   const [showIndex, setShowIndex] = useState(0);
   const resdetails = useRestaurantmenu(resid);
@@ -78,7 +79,7 @@ const Restaurantmenu = () => {
                   setShowIndex={() => {
                     setShowIndex(index);
                   }}
-                  // I can pass it as a call back function to update state variable of my parent.
+                  child = {testDatafromparent}
                 />
               </div>
             );
