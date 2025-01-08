@@ -1,4 +1,6 @@
+import { useContext } from "react";
 import { imageUrl } from "../utils/constants";
+import UserContext from "../utils/Usercontext";
 
 const RestaurantCard = ({ resDatakey }) => {
   const {
@@ -11,6 +13,8 @@ const RestaurantCard = ({ resDatakey }) => {
       cloudinaryImageId,
     },
   } = resDatakey;
+  const data = useContext(UserContext);
+  
 
   return (
     <div className="w-[300px] rounded-lg py-2 gap-8">
@@ -29,6 +33,7 @@ const RestaurantCard = ({ resDatakey }) => {
         <p className="">{costForTwo}</p>
         <p className="">{areaName}</p>
         <p className="font-bold">{avgRating}</p>
+        <p className="font-bold bg-cyan-200">STAMP : {data.loggedInUser}</p>
       </div>
     </div>
   );
