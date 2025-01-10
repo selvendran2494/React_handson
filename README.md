@@ -1,45 +1,49 @@
-# Commands used 
+Step 1 :
+npm install react-redux
+npm install @reduxjs/toolkit
 
-npm init
-npm i -D parcel
-npx parcel index.html
+Step 2:
+We need to create own store => utils => appstore.js
+        const appStore = configureStore();
 
-npm i react
-npm i react-dom
+Step 3:
+Add Store to our application => Go to root of application => App.js
+        <Provider store={appStore}></Provider>
 
-npx parcel build index.html
+Step 4:
+Create a slice => utils => cartSlice.js
+    4.1.1 => use CreateSlice to create a new slice
+        const cartSlice = createSlice({
+            name:"cart",
+            initialState:{
+                items:[]
+            }
+        })
+    4.1.2 => use reducer to modify the state based on action , small api to communicate with redux tool
+        const cartSlice = createSlice({
+        name:"cart",
+        initialState:{
+            items:[]
+        },
+        reducers:{
+            addItem:(state,action)=>{
+                state.items.push(action.payload);
+            }
+        }
+        })
+    4.1.3 => export slice and reducer below
+       export const { addItem, deleteItem, clearItem } = cartSlice.actions;
+       export default cartSlice.reducer;
+Step 5 :
+Add slice to appStore , big reducer is whole app's reducer , small reducer is for different slices.
+        import cartReducer from "./cartSlice"
+        const appStore = configureStore({
+            reducer:{
+                cart:cartReducer
+            }
+        });
+Step 6 : 
+Subscribe to the store by Selector (READ DATA , automatically updated) [To get the result]
+        const cart = useSelector((store)=>store.cart.items);
 
 
-import React from "react"
-import ReactDOM from "react-dom/client"
-
-React.CreateElement()
-ReactDOM.createRoot()
-root.render()
-
-
-import React from "react";
-import ReactDOM from "react-dom/client";
-
-// React Element
-const reactElement = <h1>This is React Element</h1>;
-
-// React Component with return
-const ReactComponent = () => {
-  return <h1>This is return ReactComponent</h1>;
-};
-
-// React Component without return
-const ReactComponentConvention = () => <h1>This is without return</h1>;
-
-//Component Composition
-const ReactComponentComposition = () => (
-  <div id="container">
-    <ReactComponent />
-    <ReactComponentConvention />
-    <h1>This is Component Composition</h1>
-  </div>
-);
-
-const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(<ReactComponentComposition />);

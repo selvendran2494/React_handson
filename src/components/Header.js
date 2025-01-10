@@ -3,12 +3,13 @@ import { logoUrl } from "../utils/constants";
 import { Link } from "react-router-dom";
 import useOnlinestatus from "../utils/useOnlinestatus";
 import UserContext from "../utils/Usercontext";
+import { useSelector } from "react-redux";
 
 const Header = () => {
   const [login, setLogin] = useState("Login");
   const data = useContext(UserContext);
-  console.log("data",data)
-  // <p>{data.loggedInUser}</p>
+  const cart = useSelector((store)=>store.cart.items);
+  console.log("cart",cart)
   const onlineStatus = useOnlinestatus();
   return (
     <header className="flex justify-between items-center p-3 bg-red-100">

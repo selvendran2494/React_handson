@@ -8,6 +8,8 @@ import Aboutus from "./src/components/Aboutus";
 import Error from "./src/components/Error";
 import Restaurantmenu from "./src/components/Restaurantmenu";
 import UserContext from "./src/utils/Usercontext";
+import { Provider } from "react-redux";
+import appStore from "./src/utils/appStore";
 
 
 const Contactus = lazy(() => import("./src/components/Contactus"));
@@ -16,10 +18,12 @@ const AppLayout = () => {
   const [userName,setUserName]=useState("Selva");
   return (
     <div className="app">
+      <Provider store={appStore}>
       <UserContext.Provider value={{loggedInUser:userName,setUserName}}>
       <Header />
       <Outlet />
       </UserContext.Provider>
+      </Provider>
     </div>
   );
 };
