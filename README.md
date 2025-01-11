@@ -1,45 +1,58 @@
-# Commands used 
+useState()
+--------------
+Super powerful react variable keeps UI layer in sync with data layer
+Whenever State variable updates , React Re-renders the component (removes the body and update quickly)
 
-npm init
-npm i -D parcel
-npx parcel index.html
+const [data,setData]=useState([]);
+setData("data1")
 
-npm i react
-npm i react-dom
+Now my data is "data1"
 
-npx parcel build index.html
+useEffect()
+-----------------
+If I need to write something after rendering the component (called after my component renders)
+e.g., api call [FLOW : Quickly renders -> make api call -> fill the details]
 
+Cases:
+---------
+1) with dependency array => called eveytime when dependency variable is updated.
+2) without a dependency array => will run every time the component renders or re-renders.
+3) without empty dependency array => runs only once—after the initial render of the component. It does not run again on subsequent re-renders of the component.
 
-import React from "react"
-import ReactDOM from "react-dom/client"
-
-React.CreateElement()
-ReactDOM.createRoot()
-root.render()
-
-
-import React from "react";
-import ReactDOM from "react-dom/client";
-
-// React Element
-const reactElement = <h1>This is React Element</h1>;
-
-// React Component with return
-const ReactComponent = () => {
-  return <h1>This is return ReactComponent</h1>;
+  useEffect(() => {
+    fetchdata();
+  }, []);
+  const fetchdata = async () => {
+    const data = await fetch(
+      "https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9832379&lng=80.1821011&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
+    );
+    const json = await data.json();
+    setlistofRestaurants(data);
+  }
+ 
+Custom Hooks
+------------
+const useRestaurantmenu = (resid) => {
+  const [resdetails, setResdetails] = useState("");
+  useEffect(() => {
+    fetchMenu();
+  }, []);
+  const fetchMenu = async () => {
+    const data = await fetch(
+      `https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=12.9832379&lng=80.1821011&restaurantId=${resid}&catalog_qa=undefined&submitAction=ENTER`
+    );
+    const json = await data.json();  
+    setResdetails(json?.data);
+  };
+  return resdetails;
 };
+export default useRestaurantmenu;
 
-// React Component without return
-const ReactComponentConvention = () => <h1>This is without return</h1>;
-
-//Component Composition
-const ReactComponentComposition = () => (
-  <div id="container">
-    <ReactComponent />
-    <ReactComponentConvention />
-    <h1>This is Component Composition</h1>
-  </div>
-);
-
-const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(<ReactComponentComposition />);
+JS Function
+------------
+const Restaurantmenu = () => {
+  const { resid } = useParams();
+  const resdetails = useRestaurantmenu(resid);
+  const { itemCards } =
+    resdetails?.cards[4].groupedCard.cardGroupMap.REGULAR.cards[2].card.card;
+}
