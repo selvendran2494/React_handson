@@ -47,3 +47,32 @@ Subscribe to the store by Selector (READ DATA , automatically updated) [To get t
         const cart = useSelector((store)=>store.cart.items);
 
 
+Real Time Flow:
+Step 1: Dispatch actions using Button Click
+    1.1
+            <button
+            className="border-2 shadow-lg px-12 m-2 hover:bg-orange-300"
+            onClick={() => {
+            handleAddItem(obj);
+            }}
+            >
+            Add
+            </button>
+    1.2
+            const dispatch = useDispatch();
+            const handleAddItem = (item) => {
+            dispatch(addItem(item));
+            };
+Step 2: Calls Reducer Function to modify the slice of store (step 5  and step 4)
+Step 3: Since it is subscribed to the store using selector , I can update easily the cart.
+
+Summary:
+1) Create Store using configureStore
+2) Add Store to our application using Provider
+3) Create a Slice => set initial value , and create actions in reducer function to modify the initial value using createSlice
+4) Add Slice to our Store using configureStore
+5) Subscribe using selector to get the updated value each time using useSelector hook
+
+Real Time:
+1) Push the payload to the store (using dispatch action and reducer function) - big effort
+2) after that all will taken care of redux using selector , since it is subscribed to the store - small effort

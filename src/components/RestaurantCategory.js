@@ -16,7 +16,7 @@ const RestaurantCategory = ({ data , showItems , setShowIndex , child }) => {
         <i className="fas fa-chevron-up"></i>      
       </div>
       {/* 2.Body */}
-      {showItems && <ItemList item={data} grandchild={child} />}
+      {showItems && <ItemList item={data.itemCards} grandchild={child} />}
     </div>
   );
 };

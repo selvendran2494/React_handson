@@ -40,9 +40,15 @@ const Header = () => {
           <li>
             <Link to="/contact-us">Contact us</Link>
           </li>
-          <li className="flex items-center">
+          <li className="flex items-center relative">
+          <Link to="/add-to-cart">
             <i className="fas fa-shopping-cart text-xl"></i>
-            <span className="ml-2">Add to Cart</span>
+            {cart.length > 0 && (
+              <span className="absolute top-[-5px] right-[-12px] bg-red-500 text-white rounded-full text-xs w-4 h-4 flex items-center justify-center">
+                {cart.length}
+              </span>
+            )}
+            </Link>
           </li>
           <p className="font-bold">{data.loggedInUser}</p>
           <button

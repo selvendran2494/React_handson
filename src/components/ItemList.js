@@ -1,13 +1,16 @@
-const ItemList = ({ item , grandchild }) => {
-  const itemCards = item.itemCards;
+import { useDispatch } from "react-redux";
+import { addItem } from "../utils/cartSlice";
+
+const ItemList = ({ item, grandchild }) => {
+  const dispatch = useDispatch();
+  const handleAddItem = (item) => {
+    dispatch(addItem(item));
+  };
   return (
     <div>
-      {itemCards?.map((obj) => {
+      {item?.map((obj) => {
         return (
-          <div
-            className="flex border-b-2 p-2 m-2"
-            key={obj.card.info.id}
-          >
+          <div className="flex border-b-2 p-2 m-2" key={obj.card.info.id}>
             <div className="flex-1">
               <h4 className="font-bold">{obj.card.info.name}</h4>
               <h4 className="font-bold">
@@ -21,7 +24,12 @@ const ItemList = ({ item , grandchild }) => {
                 alt="Dish"
                 className="object-cover h-36 w-[156px] rounded-lg"
               />
-              <button className="border-2 shadow-lg px-12 m-2 hover:bg-orange-300">
+              <button
+                className="border-2 shadow-lg px-12 m-2 hover:bg-orange-300"
+                onClick={() => {
+                  handleAddItem(obj);
+                }}
+              >
                 Add
               </button>
             </div>
