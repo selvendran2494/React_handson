@@ -47,3 +47,32 @@ Subscribe to the store by Selector (READ DATA , automatically updated) [To get t
         const cart = useSelector((store)=>store.cart.items);
 
 
+Higher Order Components
+---------------------------
+- normal Js function
+- takes component as Input => enhances the component => returns back new component.
+- import as a named Import
+
+Normal Component
+---------------------
+const RestaurantCard = ({ resDatakey }) => {
+  return (
+    <div className="w-[300px] rounded-lg py-2 gap-8">     
+    </div>
+    </div>
+  );
+};
+Higher Order Component
+-----------------------
+export const withbestsellerTag = (RestaurantCard) => {
+  return (props) => {  
+    return (
+      <div>
+        <p className="absolute bg-black text-white rounded-lg px-2">Best Ratings</p>
+        <RestaurantCard {...props} />
+      </div>
+    );
+  };
+};
+
+import RestaurantCard, { withbestsellerTag } from "./RestaurantCard";
